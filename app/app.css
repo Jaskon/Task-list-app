@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+table th,
+table td {
+    vertical-align: middle !important;
+}
+
+
+/* index.html */
+/* "margin" around the list of menu items */
+.navbar-container {
+    box-sizing: border-box;
+    margin: auto;
+    min-width: 600px;
+    width: 80%;
+}
+/* Container below the header */
+.body-container {
+    box-sizing: border-box;
+    margin: 10px auto 10px auto;
+    min-width: 600px;
+    width: 80%;
+}
+/* ui-router view container */
+.view-container {
+    box-sizing: border-box;
+    margin: 48px auto 10px auto;
+    min-width: 600px;
+    width: 800px;
+}
+/* ui-router view div (itself) */
+.view-frame {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+
+/* MainPage component */
+.main-page-task {
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 1.1;
+    margin: 14px 10px 4px 20px;
+}
+/* Date and time at the right part of the page */
+.date-week,
+.date-date,
+.date-time {
+    box-sizing: border-box;
+    display: block;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+.date-week {
+    font-size: 24px;
+    margin-top: 20px;
+}
+.date-date {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.date-time {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+/* TaskList component */
+/* Task adding form */
+.form-add-task {
+    margin: 10px auto 24px auto;
+}
+/* Margin around all elements in this form */
+.form-add-task > * {
+    margin: 0 10px 0 0;
+}
+/* Effects when user interact with elements */
+.form-add-task select {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: white;
+}
+.form-add-task select:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+.form-add-task select:active {
+    background-color: #204d74;
+    border-color: #122b40;
+}
+.form-add-task select option:checked {
+    background-color: #337ab7;
+    color: #fff;
+}
+.form-add-task select option:not(:checked) {
+    background-color: #fff;
+    color: #000;
+}
+
+.table-task-list {
+    width: 100%;
+}
+
+
+/* Additionals to bootstrap */
+.navbar-default .navbar-brand {
+    transition: .1s linear;
+}
+.navbar-default .navbar-brand.active {
+    border-bottom: 1px solid #5e5e5e;
+}
+
+.table {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.table th,
+.table td {
+    text-align: center;
+}

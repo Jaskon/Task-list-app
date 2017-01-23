@@ -1,0 +1,19 @@
+<!-- Current tasks panel (left) -->
+<div style="display: inline-block; width: 45%">
+    <h1> Your current tasks </h1>
+
+    <div ng-repeat="task in tasks" ng-if="task.severity == 1" class="main-page-task">
+        <span>{{task.text}} <span ng-if="task.completed">(completed)</span></span>
+    </div>
+
+    <br>
+    <!-- Redirect button (to '/tasklist' page) -->
+    <a href="#!/tasklist" id="btnManageTasks" class="btn btn-success">Manage tasks</a>
+</div>
+
+<!-- Date panel (right) -->
+<div class="date-div" style="float:right; width: 45%; text-align: right;">
+    <span class="date-week">{{date | date:'EEEE'}}</span>
+    <span class="date-date">{{date | date:'dd.MM.yyyy'}}</span>
+    <span class="date-time">{{date | date:'HH:mm:ss'}}</span>
+</div>
