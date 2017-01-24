@@ -5,9 +5,9 @@ mongoose.Promise = require('bluebird');
 
 
 console.log(services);
-if (services['compose-for-mongodb'] !== undefined) {
-	console.log(services['compose-for-mongodb'][0].credentials.uri);
-	mongoose.connect(services['compose-for-mongodb'][0].credentials.uri);
+if (services.mongodb !== undefined) {
+	console.log(services.mongodb[0].credentials.uri);
+	mongoose.connect(services.mongodb[0].credentials.uri);
 } else {
 	console.log('Connecting to localhost mongodb server...');
 	mongoose.connect('mongodb://localhost/tasklistdb');
