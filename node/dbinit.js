@@ -4,7 +4,7 @@ var services = require('cfenv').getAppEnv().services;
 mongoose.Promise = require('bluebird');
 
 
-if (services['compose-for-mongodb'] != undefined) {
+if (services['compose-for-mongodb'] !== undefined) {
 	console.log(services['compose-for-mongodb'][0].credentials.uri);
 	mongoose.connect(services['compose-for-mongodb'][0].credentials.uri);
 } else {
