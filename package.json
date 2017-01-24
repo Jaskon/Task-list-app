@@ -27,6 +27,9 @@
     "phantomjs-prebuilt": "^2.1.8",
     "protractor": "^4.0.9"
   },
+  "dependencies": {
+    "bower": "^1.7.7",
+  },
   "scripts": {
     "postinstall": "bower install && npm run update-webdriver",
     "start": "node node/server.js",
