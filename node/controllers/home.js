@@ -12,7 +12,7 @@ app.get('/', function(req, res, next) {
 app.use(express.static(__dirname + '/../../app'));
 
 app.get(/favicon\.ico$/, function(req, res, next) {
-    res.end(200);
+    res.end('200');
 });
 
 
@@ -42,7 +42,7 @@ app.post('/updateTasks', function(req, res, next) {
                 });
             }
 
-            res.end(200);
+            res.end('200');
         }
     });
 });
@@ -107,7 +107,7 @@ app.post('/updateTask', function(req, res, next) {
                     }
                 });
 
-                res.end(200);       // Nothing special
+                res.end('200');       // Nothing special
             }
         });
 
@@ -143,7 +143,7 @@ app.post('/insertTask', function(req, res, next) {
                             task.severity = elem.severity;
                             task.save(function(err, updatedTask) {
                                 if (err) console.log(err.message);
-                                else console.log(updatedTask);
+                                else console.log(updatedTask.text);
                             });
                         }
                     });
@@ -154,7 +154,7 @@ app.post('/insertTask', function(req, res, next) {
                 if (err) console.log('Error inserting data: ', err);
                 else {
                     console.log('Task inserted: ', insertedData.text);
-                    res.end(200);       // Nothing special
+                    res.end('200');       // Nothing special
                 }
             });
         });
@@ -163,7 +163,7 @@ app.post('/insertTask', function(req, res, next) {
             if (err) console.log('Error inserting data: ', err);
             else {
                 console.log('Task inserted: ', insertedData.text);
-                res.end(200);       // Nothing special
+                res.end('200');       // Nothing special
             }
         });
     }
@@ -208,7 +208,7 @@ app.post('/deleteTask', function(req, res, next) {
                 }
             });
 
-            res.end(200);       // Nothing special
+            res.end('200');       // Nothing special
         }
     });
 });
