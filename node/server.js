@@ -21,10 +21,10 @@ app.use(require('./controllers'));
 
 
 var port = process.env.VCAP_APP_PORT || 8080;
-var host = process.env.VCAP_APP_HOST || 'localhost';
-app.listen(port, host, function(err) {
+//var host = process.env.VCAP_APP_HOST || 'localhost';
+app.listen(port, function(err) {
     if (err)
         console.error(err);
     else
-        console.log('Running server at ' + host + ':' + port);
+        console.log('Running server at port ' + port);
 });
