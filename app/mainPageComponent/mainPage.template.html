@@ -1,6 +1,11 @@
 <!-- Current tasks panel (left) -->
 <div style="display: inline-block; width: 45%">
-    <h1> Your current tasks </h1>
+    <h1> Your current tasks
+    <br>
+    <span style="font-size: 24px">
+        (you have {{tasks | elemInObjsEqualsToCount: 'completed':false}} uncompleted at all)
+    </span>
+    </h1>
 
     <div ng-repeat="task in tasks" ng-if="task.severity == 1" class="main-page-task">
         <span>{{task.text}} <span ng-if="task.completed">(completed)</span></span>

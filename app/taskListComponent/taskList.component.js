@@ -37,6 +37,12 @@ var taskListComponentController = function($scope, $rootScope,
 
     // Save edited task
     var saveEditTask = function(task) {
+        // Check if text field is empty
+        if ($scope.tempTask.text === '') {
+            alert('Enter something in task\'s text field!');
+            return;
+        }
+
         task.severity = +$scope.tempTask.severity;
         task.text = $scope.tempTask.text;
         task.editing = false;
@@ -82,6 +88,12 @@ var taskListComponentController = function($scope, $rootScope,
 
     // Create task (by form above the table)
     var createTask = function() {
+        // Check if text field is empty
+        if ($scope.taskToCreate.text === '') {
+            alert('Enter something in task\'s text field!');
+            return;
+        }
+
         $scope.taskToCreate.severity = +$scope.taskToCreate.severity;
         if (!$scope.taskToCreate.severity) {
             $scope.taskToCreate.severity = 1;

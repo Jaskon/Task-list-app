@@ -1,1 +1,4 @@
-angular.module('mainPage', ['ui.router']);
+angular.module('mainPage', [
+	'ui.router',
+	'myFilters.elemInObjsEqualsToCount'
+]);
