@@ -7,8 +7,10 @@
     </span>
     </h1>
 
-    <div ng-repeat="task in tasks" ng-if="task.severity == 1" class="main-page-task">
-        <span>{{task.text}} <span ng-if="task.completed">(completed)</span></span>
+    <div class="main-page-tasks">
+        <div ng-repeat="task in tasks" ng-if="task.severity == 1" class="main-page-task">
+            <span>{{task.text}} <span ng-if="task.completed">(completed)</span></span>
+        </div>
     </div>
 
     <br>
