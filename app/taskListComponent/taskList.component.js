@@ -15,21 +15,6 @@ var taskListComponentController = function($scope, $rootScope,
             }
         }
 
-        var elemWithSameSeverityExists = false;
-        for (i = 0; i < $scope.tasks.length; i++) {
-            if ($scope.tasks[i].severity === task.severity) {
-                elemWithSameSeverityExists = true;
-                break;
-            }
-        }
-        if (!elemWithSameSeverityExists) {
-            $scope.tasks.forEach(function(elem) {
-                if (elem.severity > task.severity) {
-                    elem.severity--;
-                }
-            });
-        }
-
         $scope.tempTask.severity = task.severity + '';
         $scope.tempTask.text = task.text;
         task.editing = true;
@@ -50,6 +35,14 @@ var taskListComponentController = function($scope, $rootScope,
         tasksModel.dbUpdate(task, tasksModel.updateDataFromDB);
     };
 
+    // Save edited task
+    // (when pressed ctrl+enter while in textarea of editing task)
+    var ctrlEnter_SaveEditTask = function(e, task) {
+    	if (e.ctrlKey && e.keyCode == 13) {
+    		saveEditTask(task);
+    	}
+    };
+
     // Cancel task editing
     var cancelEditTask = function(task) {
         task.editing = false;
@@ -62,21 +55,6 @@ var taskListComponentController = function($scope, $rootScope,
                 $scope.tasks.splice(index, 1);
             }
         });
-
-        var elemWithSameSeverityExists = false;
-        for (var i = 0; i < $scope.tasks.length; i++) {
-            if ($scope.tasks[i].severity === task.severity) {
-                elemWithSameSeverityExists = true;
-                break;
-            }
-        }
-        if (!elemWithSameSeverityExists) {
-            $scope.tasks.forEach(function(elem) {
-                if (elem.severity > task.severity) {
-                    elem.severity--;
-                }
-            });
-        }
 
         tasksModel.dbDelete(task, tasksModel.updateDataFromDB);
     };
@@ -98,20 +76,12 @@ var taskListComponentController = function($scope, $rootScope,
         if (!$scope.taskToCreate.severity) {
             $scope.taskToCreate.severity = 1;
         }
-        // Offset other severities
-        if ($scope.betweenSeverities) {
-            $scope.tasks.forEach(function(task) {
-                if (task.severity >= $scope.taskToCreate.severity) {
-                    task.severity += 1;
-                }
-            });
-        }
         tasksModel.dbInsert({
             severity: $scope.taskToCreate.severity,
             text: $scope.taskToCreate.text,
             completed: false,
             editing: false
-        }, $scope.betweenSeverities, tasksModel.updateDataFromDB);
+        }, tasksModel.updateDataFromDB);
 
         $scope.taskToCreate.severity = '1';
         $scope.taskToCreate.text = '';
@@ -130,8 +100,6 @@ var taskListComponentController = function($scope, $rootScope,
 
     // Temporary object that changing with ng-model on html input
     $scope.tempTask = {};
-    // If we need to offset other severities (ng-model on input)
-    $scope.betweenSeverities = false;
 
     // Task will be added after createTask function
     $scope.taskToCreate = {severity: '1', text: ''};
@@ -139,6 +107,7 @@ var taskListComponentController = function($scope, $rootScope,
     // Functions defined above
     $scope.editTask = editTask;
     $scope.saveEditTask = saveEditTask;
+    $scope.ctrlEnter_SaveEditTask = ctrlEnter_SaveEditTask;
     $scope.cancelEditTask = cancelEditTask;
     $scope.deleteTask = deleteTask;
     $scope.changeCompleteState = changeCompleteState;

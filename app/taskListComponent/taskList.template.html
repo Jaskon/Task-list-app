@@ -3,16 +3,8 @@
     <!-- Severity -->
     <select class="form-control" ng-model="taskToCreate.severity">
         <option value="1" selected disabled hidden>Choose severity</option>
-        <option ng-repeat="task in tasks | orderBy:'severity' | unique:'severity' " value="{{task.severity}}">
-            Severity {{task.severity}}</option>
-        <option value="{{(tasks | max: 'severity').severity + 1}}">
-            Severity {{(tasks | max: 'severity').severity + 1}}</option>
+        <option ng-repeat="sev in [1,2,3,4]" value="{{sev}}">Severity {{sev}}</option>
     </select>
-    <!-- Between severities checkbox -->
-    <div class="form-group" title="If you want to be able to paste task with duplicate severity - don't check this.">
-        <input type="checkbox" id="between" ng-model="betweenSeverities">
-        <label for="between">Between others</label>
-    </div>
     <!-- Text -->
     <input type="text" class="form-control" ng-model="taskToCreate.text" placeholder="Enter task text here">
     <!-- Create button -->
@@ -42,13 +34,8 @@
                 </span>
 
                 <select ng-if="task.editing" class="form-control" ng-model="tempTask.severity">
-                    <option ng-repeat="taskOpt in tasks | orderBy:'severity' | unique:'severity'"
-                            value="{{taskOpt.severity}}" ng-selected="taskOpt.severity == task.severity">
-                        Severity {{taskOpt.severity}}</option>
-                    <option value="{{(tasks | max: 'severity').severity + 1}}"
-                            ng-if="task.severity != (tasks | max: 'severity').severity ||
-                            !(tasks | isUnique: 'severity':task.severity)">
-                        Severity {{(tasks | max: 'severity').severity + 1}}</option>
+                    <option ng-repeat="sev in [1,2,3,4]" value="{{sev}}" ng-selected="sev == task.severity">
+                        Severity {{sev}}</option>
                 </select>
             </td>
 
@@ -59,7 +46,7 @@
                     <span ng-if="!task.completed" class="taskText">{{task.text}}</span>
                 </span>
 
-                <textarea ng-if="task.editing" ng-model="tempTask.text" class="form-control" rows="1"></textarea>
+                <textarea ng-if="task.editing" ng-model="tempTask.text" class="form-control" rows="1" ng-keydown="ctrlEnter_SaveEditTask($event, task)"></textarea>
             </td>
 
             <!-- Buttons -->

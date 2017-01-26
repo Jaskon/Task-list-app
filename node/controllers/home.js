@@ -69,9 +69,12 @@ app.post('/updateTask', function(req, res, next) {
                 taskModel.save(function(err, insertedData) {
                     if (err) console.log('Error inserting data: ', err);
                     else {
-                        console.log('Task inserted: ', insertedData.text);*/
+                        console.log('Task inserted: ', insertedData.text);
+                    }
+                });
+            }
+        });*/
 
-        var oldTask = {severity: data.severity, text: data.text, completed: data.completed};
         data.severity = task.severity;
         data.text = task.text;
         data.completed = task.completed;
@@ -79,50 +82,17 @@ app.post('/updateTask', function(req, res, next) {
         data.save(function(err, updatedTask) {
             if (err) console.log(err.message);
             else {
-                // Severities changing (if there is no same-severity tasks)
-                models.Task.find({}).exec().then(function(tasks) {
-                    var elemWithSameSeverityExists = false;
-                    for (var i = 0; i < tasks.length; i++)
-                        if (tasks[i].severity == oldTask.severity) {
-                            elemWithSameSeverityExists = true;
-                            break;
-                        }
-                    if (!elemWithSameSeverityExists) {
-                        console.log('Changing severities...');
-                        tasks.forEach(function(elem) {
-                            if (elem.severity > oldTask.severity) {
-                                elem.severity--;
-                                models.Task.findById(elem._id, function(err, task) {
-                                    if (err) console.log(err.message);
-                                    else {
-                                        task.severity = elem.severity;
-                                        task.save(function(err, updatedTask) {
-                                            if (err) console.log(err.message);
-                                            else console.log(updatedTask);
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                console.log('Task updated:' + data.text);
 
                 res.end('200');       // Nothing special
             }
         });
-
-                        
-                    /*}
-                });
-            }
-        });*/
     });
 });
 
 app.post('/insertTask', function(req, res, next) {
 
     console.log('\'/insertTask\' request from ', req.connection.remoteAddress ,'. Data: ', req.body);
-    var betweenSeverities = req.body.betweenSeverities;
 
     // Push created task
     var taskModel = new models.Task({
@@ -131,42 +101,13 @@ app.post('/insertTask', function(req, res, next) {
         completed: req.body.task.completed
     });
 
-    // Changing severities (if betweenSeverities is true)
-    if (betweenSeverities) {
-        models.Task.find({}).exec().then(function(tasks) {
-            tasks.forEach(function(elem) {
-                if (elem.severity >= req.body.task.severity) {
-                    elem.severity++;
-                    models.Task.findById(elem._id, function(err, task) {
-                        if (err) console.log(err.message);
-                        else {
-                            task.severity = elem.severity;
-                            task.save(function(err, updatedTask) {
-                                if (err) console.log(err.message);
-                                else console.log(updatedTask.text);
-                            });
-                        }
-                    });
-                }
-            });
-
-            taskModel.save(function(err, insertedData) {
-                if (err) console.log('Error inserting data: ', err);
-                else {
-                    console.log('Task inserted: ', insertedData.text);
-                    res.end('200');       // Nothing special
-                }
-            });
-        });
-    } else {
-        taskModel.save(function(err, insertedData) {
-            if (err) console.log('Error inserting data: ', err);
-            else {
-                console.log('Task inserted: ', insertedData.text);
-                res.end('200');       // Nothing special
-            }
-        });
-    }
+    taskModel.save(function(err, insertedData) {
+        if (err) console.log('Error inserting data: ', err);
+        else {
+            console.log('Task inserted: ', insertedData.text);
+            res.end('200');       // Nothing special
+        }
+    });
 });
 
 app.post('/deleteTask', function(req, res, next) {
@@ -179,34 +120,6 @@ app.post('/deleteTask', function(req, res, next) {
         if (err) console.log('Error while removing task: ', err);
         else {
             console.log('Task deleted: ', deletedInfo);
-
-            // Severities changing (if there is no same-severity tasks)
-            models.Task.find({}).exec().then(function(tasks) {
-                var elemWithSameSeverityExists = false;
-                for (var i = 0; i < tasks.length; i++)
-                    if (tasks[i].severity == task.severity) {
-                        elemWithSameSeverityExists = true;
-                        break;
-                    }
-                if (!elemWithSameSeverityExists) {
-                    console.log('Changing severities...');
-                    tasks.forEach(function(elem) {
-                        if (elem.severity > task.severity) {
-                            elem.severity--;
-                            models.Task.findById(elem._id, function(err, task) {
-                                if (err) console.log(err.message);
-                                else {
-                                    task.severity = elem.severity;
-                                    task.save(function(err, updatedTask) {
-                                        if (err) console.log(err.message);
-                                        else console.log(updatedTask);
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
 
             res.end('200');       // Nothing special
         }

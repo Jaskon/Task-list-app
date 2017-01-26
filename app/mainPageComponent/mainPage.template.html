@@ -8,8 +8,13 @@
     </h1>
 
     <div class="main-page-tasks">
-        <div ng-repeat="task in tasks" ng-if="task.severity == 1" class="main-page-task">
-            <span>{{task.text}} <span ng-if="task.completed">(completed)</span></span>
+        <div ng-repeat="task in tasks | objsWithMinVariable: 'severity'" class="main-page-task">
+            <span ng-class="{
+                    'main-page-task-sev1': task.severity === 1,
+                    'main-page-task-sev2': task.severity === 2,
+                    'main-page-task-sev3': task.severity === 3,
+                    'main-page-task-sev4': task.severity === 4
+            }">{{task.text}} <span ng-if="task.completed">(completed)</span></span>
         </div>
     </div>
 

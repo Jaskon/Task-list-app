@@ -48,6 +48,19 @@ table td {
     line-height: 1.1;
     margin: 10px 10px 4px 0;
 }
+/* Task color */
+.main-page-task-sev1 {
+    color: red;
+}
+.main-page-task-sev2 {
+    color: darkorange;
+}
+.main-page-task-sev3 {
+    color: #5bc0de;
+}
+.main-page-task-sev4 {
+    color: green;
+}
 /* Date and time at the right part of the page */
 .date-week,
 .date-date,

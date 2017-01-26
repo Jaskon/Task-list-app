@@ -1,4 +1,5 @@
 angular.module('mainPage', [
 	'ui.router',
-	'myFilters.elemInObjsEqualsToCount'
+	'myFilters.elemInObjsEqualsToCount',
+	'myFilters.objsWithMinVariable'
 ]);

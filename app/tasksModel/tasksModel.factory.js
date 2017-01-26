@@ -32,9 +32,9 @@ angular.module('taskListApp').factory('tasksModel', [
         };
 
         // Post request - insert task in db
-        var dbInsert = function(task, betweenSeverities, callback) {
+        var dbInsert = function(task, callback) {
             post('/insertTask',
-                {task:task, betweenSeverities: betweenSeverities},
+                {task: task},
                 callback);
         };
 
