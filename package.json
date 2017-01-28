@@ -8,10 +8,14 @@
   "dependencies": {
     "bluebird": "latest",
     "body-parser": "1.16.0",
-    "express": "latest",
-    "consolidate": "latest",
-    "mustache": "latest",
     "connect-mongo": "latest",
+    "consolidate": "latest",
+    "express": "latest",
+    "gulp": "3.9.x",
+    "gulp-concat": "2.6.x",
+    "gulp-sourcemaps": "2.4.x",
+    "gulp-uglify": "2.0.x",
+    "mustache": "latest",
     "mongoose": "latest",
     "mongoose-unique-validator": "latest",
 
@@ -28,6 +32,7 @@
   },
   "scripts": {
     "postinstall": "bower install && npm run update-webdriver",
+    "prestart": "gulp --gulpfile node/gulpfile.js",
     "start": "node node/server.js",
     "test": "karma start karma.conf.ci.js --no-fail-on-empty-test-suite",
     "test-single-run": "karma start karma.conf.js --single-run",
