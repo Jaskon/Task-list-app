@@ -6,6 +6,10 @@ var gulpUglify 		= require('gulp-uglify');
 // Gulp concat and minify
 gulp.task('scripts', function() {
 	return gulp.src([
+		'./../app/app.module.js',
+		'./../app/app.js',
+		'./../app/app.config.js',
+		'./../app/tasksModel/tasksModel.factory.js',
 		'./../app/mainPageComponent/mainPage.module.js',
 		'./../app/mainPageComponent/mainPage.component.js',
 		'./../app/taskListComponent/taskList.module.js',
