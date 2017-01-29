@@ -17,10 +17,7 @@ describe('taskListComponent', function() {
             $httpBackend.flush();
 
             $httpBackend.whenPOST('/insertTask', 
-                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}, betweenSeverities: false})
-                .respond(200);
-            $httpBackend.whenPOST('/insertTask', 
-                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}, betweenSeverities: true})
+                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}})
                 .respond(200);
             $httpBackend.whenPOST('/deleteTask', 
                 {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}})
@@ -66,30 +63,13 @@ describe('taskListComponent', function() {
 
         it('should post an /insertTask request with tempTask data', function() {
             $httpBackend.expectPOST('/insertTask',
-                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}, betweenSeverities: false});
+                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}});
 
             $scope.taskToCreate = {
                 severity: 1,
                 text: 'Task text 1',
                 completed: false
             };
-            $scope.createTask();
-
-            $httpBackend.flush();
-
-            // Callback (do not calling by karma)
-        });
-
-        it('should post an /insertTask request with tempTask data (betweenSeverities is true)', function() {
-            $httpBackend.expectPOST('/insertTask',
-                {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}, betweenSeverities: true});
-
-            $scope.taskToCreate = {
-                severity: 1,
-                text: 'Task text 1',
-                completed: false
-            };
-            $scope.betweenSeverities = true;
             $scope.createTask();
 
             $httpBackend.flush();

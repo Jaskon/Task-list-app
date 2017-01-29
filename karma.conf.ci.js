@@ -17,7 +17,7 @@ module.exports = function (config) {
             'app/mainPageComponent/*.js':   ['coverage'],
             'app/taskListComponent/*.js':   ['coverage']
         },
-        browsers:  ['PhantomJS'],
+        browsers:  ['Chrome'],
         sonarQubeUnitReporter: {
             useBrowserName: false,
             outputDir: 'reports/junit',
