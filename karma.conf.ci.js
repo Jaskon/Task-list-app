@@ -23,7 +23,7 @@ module.exports = function (config) {
             outputDir: 'reports/junit',
             outputFile: 'TESTS-xunit.xml',
         },
-        plugins: ['karma-phantomjs-launcher', 'karma-chrome-launcher', 'karma-coverage','karma-jasmine','karma-sonarqube-unit-reporter'],
+        plugins: ['karma-chrome-launcher', 'karma-coverage','karma-jasmine','karma-sonarqube-unit-reporter'],
         coverageReporter: {
             type:   'lcov',
             dir:    'reports',
