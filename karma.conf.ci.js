@@ -17,13 +17,13 @@ module.exports = function (config) {
             'app/mainPageComponent/*.js':   ['coverage'],
             'app/taskListComponent/*.js':   ['coverage']
         },
-        browsers:  ['Chrome'],
+        browsers:  ['PhantomJS'],
         sonarQubeUnitReporter: {
             useBrowserName: false,
             outputDir: 'reports/junit',
             outputFile: 'TESTS-xunit.xml',
         },
-        plugins: ['karma-chrome-launcher', 'karma-coverage','karma-jasmine','karma-sonarqube-unit-reporter'],
+        plugins: ['karma-phantomjs-launcher', 'karma-coverage','karma-jasmine','karma-sonarqube-unit-reporter'],
         coverageReporter: {
             type:   'lcov',
             dir:    'reports',

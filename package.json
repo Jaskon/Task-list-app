@@ -24,7 +24,7 @@
     "cfenv": "^1.0.3",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
-    "karma-chrome-launcher": "^0.2.3",
+    "karma-phantomjs-launcher": "1.0.2",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^0.3.8",
     "karma-sonarqube-unit-reporter": "0.0.7",

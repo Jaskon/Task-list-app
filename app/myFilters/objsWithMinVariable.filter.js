@@ -5,15 +5,16 @@ filter('objsWithMinVariable', function() {
 			return collection;
 
 		var min = collection[0][key];
+		var i;
 
-		for (let i = 1; i < collection.length; i++) {
+		for (i = 1; i < collection.length; i++) {
 			if (collection[i][key] < min) {
 				min = collection[i][key];
 			}
 		}
 
 		var objs = [];
-		for (let i = 0; i < collection.length; i++) {
+		for (i = 0; i < collection.length; i++) {
 			if (collection[i][key] === min) {
 				objs.push(collection[i]);
 			}
