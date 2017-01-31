@@ -30,20 +30,3 @@
 .table-tasks .ng-leave {
     display: none;
 }
-/*.table-task-row.ng-enter,
-.table-task-row.ng-leave {
-    transition: .58s ease-out;
-}
-.table-task-row.ng-enter {
-    transform: translateX(100%);
-}
-.table-task-row.ng-enter.ng-enter-active {
-    transform: translateX(0px);
-}
-.table-task-row.ng-leave {
-    transform: translateX(0);
-}
-.table-task-row.ng-leave.ng-leave-active {
-    transform: translateX(-100%);
-}
-*/
