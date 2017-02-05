@@ -10,9 +10,9 @@ angular.module('taskListApp').factory('tasksModel', [
         // Template for post requests below
         var post = function(req, obj, callback) {
             $http.post(req, obj)
-            .then(function() {
+            .then(function(response) {
                 if (callback) {
-                    callback();
+                    callback(response);
                 }
             }, function(response) {
                 console.log(['Error while doing ', req, ' request:'].join(''));
@@ -29,18 +29,38 @@ angular.module('taskListApp').factory('tasksModel', [
         // Post request - update task in db
         var dbUpdate = function(task, callback) {
             post('/updateTask', task, callback);
+
+            for (var i = 0; i < tasks.length; i++)
+                if (tasks[i]._id === task._id) {
+                    for (var j in task)
+                        tasks[i][j] = task[j];
+                    break;
+                }
         };
 
         // Post request - insert task in db
         var dbInsert = function(task, callback) {
             post('/insertTask',
                 {task: task},
-                callback);
+                function(response) {
+                    task._id = response.data._id;
+
+                    if (callback)
+                        callback();
+                });
+
+            tasks.push(task);
         };
 
         // Post request - delete task from db
         var dbDelete = function(task, callback) {
             post('/deleteTask', {task: task}, callback);
+
+            for (var i = 0; i < tasks.length; i++)
+                if (tasks[i]._id === task._id) {
+                    tasks.splice(i, 1);
+                    break;
+                }
         };
 
 
@@ -84,6 +104,7 @@ angular.module('taskListApp').factory('tasksModel', [
                     }
                 }
             }, function(response) {
+                $rootScope.$broadcast('responseError');
                 console.log('Error while updating data from DataBase:');
                 console.log(response);
             });
@@ -101,6 +122,7 @@ angular.module('taskListApp').factory('tasksModel', [
             dbUpdate: dbUpdate,
             dbInsert: dbInsert,
             dbDelete: dbDelete,
-            updateDataFromDB: updateDataFromDB
+            updateDataFromDB: updateDataFromDB,
+            currentRequests: $http.pendingRequests
         };
 }]);

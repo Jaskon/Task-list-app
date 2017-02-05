@@ -6,33 +6,25 @@ var taskListComponentController = function($scope, $rootScope,
     var editTask = function(task) {
         var i;
 
-        // If any task is already editing - break
-        for (i = 0; i < $scope.tasks.length; i++) {
-            if ($scope.tasks[i].editing) {
-                alert(['You have a task already editing!',
-                    'Save or cancel it!'].join(' '));
-                return;
-            }
-        }
-
-        $scope.tempTask.severity = task.severity + '';
-        $scope.tempTask.text = task.text;
+        $scope.tempTask[task._id] = {};
+        $scope.tempTask[task._id].severity = task.severity + '';
+        $scope.tempTask[task._id].text = task.text;
         task.editing = true;
     };
 
     // Save edited task
     var saveEditTask = function(task) {
         // Check if text field is empty
-        if ($scope.tempTask.text === '') {
+        if ($scope.tempTask[task._id].text === '') {
             alert('Enter something in task\'s text field!');
             return;
         }
 
-        task.severity = +$scope.tempTask.severity;
-        task.text = $scope.tempTask.text;
+        task.severity = +$scope.tempTask[task._id].severity;
+        task.text = $scope.tempTask[task._id].text;
         task.editing = false;
 
-        tasksModel.dbUpdate(task, tasksModel.updateDataFromDB);
+        tasksModel.dbUpdate(task);
     };
 
     // Save edited task
@@ -50,40 +42,35 @@ var taskListComponentController = function($scope, $rootScope,
 
     // Delete task (button)
     var deleteTask = function(task) {
-        $scope.tasks.forEach(function(elem, index) {
-            if (task._id === elem._id) {
-                $scope.tasks.splice(index, 1);
-            }
-        });
-
-        tasksModel.dbDelete(task, tasksModel.updateDataFromDB);
+        tasksModel.dbDelete(task);
     };
 
     // Check/uncheck complete checkbox
     var changeCompleteState = function(task) {
-        tasksModel.dbUpdate(task, tasksModel.updateDataFromDB);
+        tasksModel.dbUpdate(task);
     };
 
     // Create task (by form above the table)
     var createTask = function() {
         // Check if text field is empty
-        if ($scope.taskToCreate.text === '') {
-            alert('Enter something in task\'s text field!');
+        if (!$scope.taskToCreate.text || !$scope.taskToCreate.severity) {
+            $scope.taskToCreateIsInvalid = true;
             return;
         }
 
         $scope.taskToCreate.severity = +$scope.taskToCreate.severity;
         if (!$scope.taskToCreate.severity) {
-            $scope.taskToCreate.severity = 1;
+            $scope.taskToCreate.severity = 0;
         }
         tasksModel.dbInsert({
             severity: $scope.taskToCreate.severity,
             text: $scope.taskToCreate.text,
             completed: false,
             editing: false
-        }, tasksModel.updateDataFromDB);
+        });
 
-        $scope.taskToCreate.severity = '1';
+        $scope.taskToCreateIsInvalid = false;
+        $scope.taskToCreate.severity = '';
         $scope.taskToCreate.text = '';
     };
 
@@ -99,10 +86,11 @@ var taskListComponentController = function($scope, $rootScope,
 
 
     // Temporary object that changing with ng-model on html input
-    $scope.tempTask = {};
+    $scope.tempTask = [];
 
     // Task will be added after createTask function
-    $scope.taskToCreate = {severity: '1', text: ''};
+    $scope.taskToCreate = {severity: '', text: ''};
+    $scope.taskToCreateIsInvalid = false;
 
     // Functions defined above
     $scope.editTask = editTask;

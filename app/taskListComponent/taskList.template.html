@@ -1,12 +1,13 @@
 <!-- Form for adding a new task -->
 <form class="form-inline form-add-task">
     <!-- Severity -->
-    <select class="form-control" ng-model="taskToCreate.severity">
-        <option value="1" selected disabled hidden>Choose severity</option>
+    <select class="form-control task-severity" ng-model="taskToCreate.severity" ng-required="taskToCreateIsInvalid">
+        <option value="" selected disabled hidden>Choose severity</option>
         <option ng-repeat="sev in [1,2,3,4]" value="{{sev}}">Severity {{sev}}</option>
     </select>
     <!-- Text -->
-    <input type="text" class="form-control" ng-model="taskToCreate.text" placeholder="Enter task text here">
+    <input type="text" class="form-control task-text" ng-model="taskToCreate.text" placeholder="Enter task text here"
+            ng-required="taskToCreateIsInvalid">
     <!-- Create button -->
     <button class="form-control btn btn-success" id="btnCreateTask" ng-click="createTask()">Create task</button>
 </form>
@@ -33,7 +34,7 @@
                     {{task.severity}}
                 </span>
 
-                <select ng-if="task.editing" class="form-control" ng-model="tempTask.severity">
+                <select ng-if="task.editing" class="form-control" ng-model="tempTask[task._id].severity">
                     <option ng-repeat="sev in [1,2,3,4]" value="{{sev}}" ng-selected="sev == task.severity">
                         Severity {{sev}}</option>
                 </select>
@@ -46,7 +47,7 @@
                     <span ng-if="!task.completed" class="taskText">{{task.text}}</span>
                 </span>
 
-                <textarea ng-if="task.editing" ng-model="tempTask.text" class="form-control" rows="1" ng-keydown="ctrlEnter_SaveEditTask($event, task)"></textarea>
+                <textarea ng-if="task.editing" ng-model="tempTask[task._id].text" class="form-control" rows="1" ng-keydown="ctrlEnter_SaveEditTask($event, task)"></textarea>
             </td>
 
             <!-- Buttons -->

@@ -14,7 +14,7 @@ describe('tasksModel', function() {
         getTasksRequestHandler = $httpBackend.whenGET('/getTasks').respond([]);
         $httpBackend.whenPOST('/updateTasks').respond(200);
         $httpBackend.whenPOST('/updateTask').respond(200);
-        $httpBackend.whenPOST('/insertTask').respond(200);
+        $httpBackend.whenPOST('/insertTask').respond({_id: '1'});
         $httpBackend.whenPOST('/deleteTask').respond(200);
 
         // Initial request

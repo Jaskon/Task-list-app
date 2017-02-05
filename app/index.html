@@ -48,11 +48,18 @@
 <header ng-controller="headerController">
     <nav class="navbar navbar-default">
         <div class="navbar-container">
-            <a href= "{{menu.link}}" ng-repeat="menu in menuList" class="navbar-brand" ng-class="{active: menu.active}">
+            <a href="{{menu.link}}" ng-repeat="menu in menuList" class="navbar-brand" ng-class="{active: menu.active}">
                 {{menu.name}}
             </a>
+            <!-- Update button on the right -->
+            <a class="navbar-brand navbar-right" style="cursor: pointer" ng-click="updateData()">Update data</a>
+            <!-- Displays while waiting a response(s) from the server -->
+            <div class="navbar-brand navbar-right">
+                <div class="loading-elem" ng-class="{'loading-elem-show': loading}" data-loading>Waiting response...</div>
+            </div>
         </div>
     </nav>
+    <div class="http-error" ng-class="{'http-error-show': responseError.state}">{{httpErrorText}}</div>
 </header>
 
 

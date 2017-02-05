@@ -1,6 +1,6 @@
 angular.module('taskListApp').config([
-    '$stateProvider', '$urlRouterProvider', '$locationProvider',
-    function($stateProvider, $urlRouterProvider, $locationProvider) {
+    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+    function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $locationProvider.hashPrefix('!');
 
         // ui-router config
@@ -16,4 +16,8 @@ angular.module('taskListApp').config([
 
         // If none of above
         $urlRouterProvider.otherwise('/mainpage');
+
+        // On any request error
+        //$httpProvider.interceptors.push('reqErrorHandler');
+        //$httpProvider.interceptors.push('resErrorHandler');
     }]);

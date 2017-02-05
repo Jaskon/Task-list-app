@@ -37,6 +37,38 @@ table td {
     width: 100%;
 }
 
+/* Loading element (when $http is "active") */
+.loading-elem {
+    animation: loading-elem-blinking .8s infinite alternate;
+    display: none;
+}
+.loading-elem-show {
+    display: block;
+}
+@keyframes loading-elem-blinking {
+    0%   { color: black; }
+    100% { color: orange; }
+}
+
+.http-error {
+    color: red;
+    display: none;
+    font-size: 16px;
+    opacity: 0;
+    position: fixed;
+    right: 40px;
+    top: 60px;
+}
+.http-error-show {
+    animation: http-error-elem-blinking 3s;
+    display: block;
+}
+@keyframes http-error-elem-blinking {
+    0%   { opacity: 1; }
+    40%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 
 /* MainPage component */
 .main-page-tasks {
@@ -115,6 +147,13 @@ table td {
 .form-add-task select option:not(:checked) {
     background-color: #fff;
     color: #000;
+}
+/* Adding/editing form validation */
+.form-add-task .task-severity.ng-invalid {
+    border-color: red;
+}
+.form-add-task .task-text.ng-invalid {
+	border-color: red;
 }
 
 .table-task-list {

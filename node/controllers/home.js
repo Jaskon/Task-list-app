@@ -104,8 +104,8 @@ app.post('/insertTask', function(req, res, next) {
     taskModel.save(function(err, insertedData) {
         if (err) console.log('Error inserting data: ', err);
         else {
-            console.log('Task inserted: ', insertedData.text);
-            res.end('200');       // Nothing special
+            console.log('Task inserted: ', JSON.stringify(insertedData._id));
+            res.end(JSON.stringify({_id: insertedData._id}));       // Nothing special
         }
     });
 });

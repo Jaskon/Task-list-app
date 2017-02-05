@@ -18,7 +18,7 @@ describe('taskListComponent', function() {
 
             $httpBackend.whenPOST('/insertTask', 
                 {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}})
-                .respond(200);
+                .respond({_id: '1'});
             $httpBackend.whenPOST('/deleteTask', 
                 {task: {severity: 1, text: 'Task text 1', completed: false, editing: false}})
                 .respond(200);
@@ -38,20 +38,11 @@ describe('taskListComponent', function() {
 
         // Tasks editing functions
         it('should start task\'s editing mode and modify tempTask variable', function() {
-            var task = {severity: 1, text: 'Task text 1', completed: false, editing: false};
+            var task = {_id: '1', severity: 1, text: 'Task text 1', completed: false, editing: false};
             $scope.editTask(task);
 
-            expect(task).toEqual({severity: 1, text: 'Task text 1', completed: false, editing: true});
-            expect($scope.tempTask).toEqual({severity: '1', text: 'Task text 1'});
-        });
-
-        it('should not be able to start task\'s editing mode and alert a message about it', function() {
-            $scope.tasks = [{severity: 1, text: 'Task text 1', completed: true, editing: true}];
-            var task = {severity: 1, text: 'Task text 1', completed: false, editing: false};
-            $scope.editTask(task);
-
-            expect(task).toEqual({severity: 1, text: 'Task text 1', completed: false, editing: false});
-            expect($scope.tempTask).toEqual({});
+            expect(task).toEqual({_id: '1', severity: 1, text: 'Task text 1', completed: false, editing: true});
+            expect($scope.tempTask['1']).toEqual({severity: '1', text: 'Task text 1'});
         });
 
         it('should cancel task\'s editing mode', function() {
