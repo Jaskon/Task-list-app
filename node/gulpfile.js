@@ -1,24 +1,45 @@
-var gulp			= require('gulp');
-var gulpConcat		= require('gulp-concat');
-var gulpSourcemaps	= require('gulp-sourcemaps');
-var gulpUglify 		= require('gulp-uglify');
+var gulp = require("gulp");
+var browserify = require("browserify");
+var source = require('vinyl-source-stream');
+var tsify = require("tsify");
+var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
+var buffer = require('vinyl-buffer');
 
-// Gulp concat and minify
-gulp.task('scripts', function() {
-	return gulp.src([
-		'./../app/app.module.js',
-		'./../app/app.js',
-		'./../app/app.config.js',
-		'./../app/tasksModel/tasksModel.factory.js',
-		'./../app/mainPageComponent/mainPage.module.js',
-		'./../app/mainPageComponent/mainPage.component.js',
-		'./../app/taskListComponent/taskList.module.js',
-		'./../app/taskListComponent/taskList.component.js'
-	]).pipe(gulpConcat('gulped.js'))
-	.pipe(gulpUglify())
-	.pipe(gulpSourcemaps.write())
-	.pipe(gulp.dest('./../app/gulped'));
-});
-gulp.task('default', ['scripts'], function() {
-	console.log('gulp success');
+gulp.task("default", [], function () {
+	var external = [
+		'@angular/common',
+		'@angular/compiler',
+		'@angular/core',
+		'@angular/forms',
+		'@angular/http',
+		'@angular/platform-browser',
+		'@angular/platform-browser-dynamic',
+		'@angular/router',
+		'@angular/upgrade',
+		'angular-in-memory-web-api',
+		'systemjs',
+		'core-js',
+		'rxjs/Rx',
+		'zone.js'
+	];
+
+    return browserify({
+        basedir: '.',
+        debug: true,
+        entries: [
+        	'../app/bootstrap.ts'
+        ],
+        cache: {},
+        packageCache: {}
+    })
+    .external(external)
+    .plugin(tsify)		// Typescript compile
+    .bundle()
+    .pipe(source('bundle_app.js'))		// Name of our final script
+    //.pipe(buffer())
+    //.pipe(sourcemaps.init({loadMaps: true}))
+    //.pipe(uglify())		// Minify
+    //.pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest("../app/gulped"));		// Place of our final script
 });

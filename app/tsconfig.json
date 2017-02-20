@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "target": "es2015",
+        "typeRoots": [
+            "../node_modules/@types"
+        ],
+        "types": [
+            "core-js"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "target": "es2015",
+        "skipLibCheck": true,
+        "typeRoots": [
+            "../node_modules/@types"
+        ],
+        "types": [
+            "core-js"
+        ]
+    }
+}

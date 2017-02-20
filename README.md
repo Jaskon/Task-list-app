@@ -1,2 +1,0 @@
-# AngularJS Task List Application
-

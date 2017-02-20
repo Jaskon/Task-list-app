@@ -1,8 +1,12 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
 // Filter that check if there is no another values with this key
 // in this collection
-angular.module('myFilters.isUnique', []).
-filter('isUnique', function() {
-    return function(collection, key, value) {
+@Pipe({
+    name: 'isUnique'
+})
+export class isUniquePipe implements PipeTransform {
+    transform(collection: any[], key: any, value: any): boolean {
         var count = 0;
 
         collection.forEach(function(item) {
@@ -13,5 +17,5 @@ filter('isUnique', function() {
 
         // 1 - itself
         return count > 1 ? false : true;
-    };
-});
+    }
+}
