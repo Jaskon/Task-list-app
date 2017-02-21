@@ -8,7 +8,7 @@
     </h1>
 
     <div class="main-page-tasks">
-        <div *ngFor="let task of (tasks | objsWithMinVariable: 'severity')" class="main-page-task">
+        <div *ngFor="let task of (tasks | objsVariableEqualsTo: 'completed':false | objsWithMinVariable: 'severity')" class="main-page-task">
             <span [ngClass]="{
                     'main-page-task-sev1': task.severity === 1,
                     'main-page-task-sev2': task.severity === 2,
