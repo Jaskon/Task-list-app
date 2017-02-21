@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'objsWithMinVariable'
+    name: 'objsWithMinVariable',
+    pure: false
 })
 export class objsWithMinVariablePipe implements PipeTransform {
     transform(collection: any[], key: any): any[] {
