@@ -5,7 +5,8 @@ import { FormsModule }   from '@angular/forms';
 import { taskListComponent } from './taskList.component';
 
 import { PipesModule } from './../pipes/pipes.module';
-import { tasksModelService } from './../tasksModel/tasksModel.service';
+import { tasksModelService } from './../services/tasksModel.service';
+import { EventsService } from './../services/events.service';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { tasksModelService } from './../tasksModel/tasksModel.service';
         PipesModule
     ],
     declarations: [ taskListComponent ],
-    providers: [ tasksModelService ],
+    providers: [ tasksModelService, EventsService ],
     exports: [ taskListComponent ],
     bootstrap: [ taskListComponent ]
 })

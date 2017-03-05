@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { tasksModelService } from './../tasksModel/tasksModel.service';
+import { tasksModelService } from './../services/tasksModel.service';
 
 @Component({
 	selector: 'list-overview',

@@ -1,7 +1,8 @@
 import { task } from './../interfaces';
 
 import { Component } from '@angular/core';
-import { tasksModelService } from './../tasksModel/tasksModel.service';
+import { tasksModelService } from './../services/tasksModel.service';
+import { EventsService } from './../services/events.service';
 
 @Component({
     selector: 'task-list',
@@ -17,7 +18,7 @@ export class taskListComponent {
     taskToCreate: task;
     taskToCreateIsInvalid: boolean;
 
-    constructor(tasksModel: tasksModelService) {
+    constructor(tasksModel: tasksModelService, eventsService: EventsService) {
         this.tasksModel = tasksModel;
         this.tasks = tasksModel.tasks;
 
@@ -28,7 +29,7 @@ export class taskListComponent {
 
         this.tasksModel.sortTasks();
 
-        //$rootScope.$broadcast('pageChanged', {name: 'List of tasks'});
+        eventsService.broadcast('pageChanged', {name: 'List of tasks'});
     }
 
 

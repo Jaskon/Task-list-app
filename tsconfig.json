@@ -1,16 +1,13 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
+        "target": "es2015",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "commonjs",
-        "target": "es2015",
-        "skipLibCheck": true,
-        "typeRoots": [
-            "../node_modules/@types"
-        ],
-        "types": [
-            "core-js"
-        ]
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "skipLibCheck": true
     }
 }

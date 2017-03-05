@@ -5,7 +5,9 @@ import { overviewComponent } from './overview.component';
 
 import { PipesModule } from './../pipes/pipes.module';
 
-import { tasksModelService } from './../tasksModel/tasksModel.service';
+import { tasksModelService } from './../services/tasksModel.service';
+import { EventsService } from './../services/events.service';
+
 
 @NgModule({
 	imports: [
@@ -13,7 +15,7 @@ import { tasksModelService } from './../tasksModel/tasksModel.service';
         PipesModule
     ],
 	declarations: [ overviewComponent ],
-    providers: [ tasksModelService ],
+    providers: [ tasksModelService, EventsService ],
     exports: [ overviewComponent ],
 	bootstrap: [ overviewComponent ]
 })

@@ -6,7 +6,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
 
-gulp.task("default", [], function () {
+gulp.task('default', [], function() {
 	var external = [
 		'@angular/common',
 		'@angular/compiler',

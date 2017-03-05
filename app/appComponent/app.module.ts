@@ -6,7 +6,8 @@ import { appComponent } from './app.component';
 import { overviewModule } from './overviewComponent/overview.module';
 import { taskListModule } from './taskListComponent/taskList.module';
 
-import { tasksModelService } from './tasksModel/tasksModel.service';
+import { tasksModelService } from './services/tasksModel.service';
+import { EventsService } from './services/events.service';
 import { appRoutingModule } from './appRouting/appRouting.module';
 
 @NgModule({
@@ -18,7 +19,7 @@ import { appRoutingModule } from './appRouting/appRouting.module';
         appRoutingModule
     ],
     declarations: [ appComponent ],
-    providers: [ tasksModelService ],
+    providers: [ tasksModelService, EventsService ],
     bootstrap: [ appComponent ]
 })
 export class appModule {  }

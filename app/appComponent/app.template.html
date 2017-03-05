@@ -13,7 +13,7 @@
             </div>
         </div>
     </nav>
-    <div class="http-error" ng-class="{'http-error-show': responseError.state}">{{httpErrorText}}</div>
+    <div class="http-error" [ngClass]="{'http-error-show': responseError.state}">{{httpErrorText}}</div>
 </header>
 
 

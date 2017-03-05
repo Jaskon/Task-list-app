@@ -6,6 +6,7 @@
   "repository": "",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^7.0.5",
     "bluebird": "latest",
     "body-parser": "1.16.0",
     "browserify": "latest",
@@ -30,6 +31,8 @@
     "cfenv": "^1.0.3",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-phantomjs-launcher": "1.0.2",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^0.3.8",
@@ -50,7 +53,8 @@
     "core-js": "^2.4.1",
     "rxjs": "5.0.1",
     "zone.js": "^0.7.4",
-    "when": "latest"
+    "when": "latest",
+    "gulp-inline-ng2-template": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"
@@ -62,7 +66,7 @@
     "postinstall": "bower install && npm run update-webdriver",
     "prestart": "gulp --gulpfile node/gulpfile.js",
     "start": "node node/server.js",
-    "test": "karma start karma.conf.ci.js --no-fail-on-empty-test-suite",
+    "test": "gulp --gulpfile node/gulpfile_tests.js && karma start karma.conf.ci.js --no-fail-on-empty-test-suite",
     "test-single-run": "karma start karma.conf.js --single-run",
     "update-webdriver": "webdriver-manager update",
     "protractor": "protractor e2e-tests/protractor.conf.js",
