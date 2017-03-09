@@ -46,7 +46,8 @@ export class tasksModelService {
         this.post('/insertTask',
             {task: task},
             function(response: any) {
-                task._id = response.data._id;
+                console.log('Hi! ^_^');
+                task._id = response.json()._id;
 
                 if (callback)
                     callback();

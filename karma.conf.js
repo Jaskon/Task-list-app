@@ -28,11 +28,15 @@ module.exports = function(config) {
       { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
       // HTML and CSS files
-      { pattern: 'app/appComponent/app.template.html', included: false, watched: false },
+      { pattern: 'base/app/appComponent/app.template.html', included: false, watched: false },
 
       // My tests file
-      'app/gulped/bundle_tests.js'
+      'app/bundled/tests.js'
     ],
+
+    proxies: {
+      "/appComponent/": '/base/app/appComponent/'
+    },
 
     autoWatch: true,
 

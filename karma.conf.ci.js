@@ -11,7 +11,7 @@ module.exports = function (config) {
         autoWatch: false,
         reporters: ['progress', 'sonarqubeUnit', 'coverage'],
         preprocessors:    { 
-            'app/gulped/bundle_app.js':   ['coverage']
+            'app/bundled/app.js':   ['coverage']
         },
         browsers:  ['Chrome'],
         sonarQubeUnitReporter: {

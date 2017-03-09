@@ -1,5 +1,5 @@
 <!-- Form for adding a new task -->
-<form class="form-inline form-add-task">
+<form id="formTaskCreate" class="form-inline form-add-task">
     <!-- Severity -->
     <select class="form-control task-severity" [(ngModel)]="taskToCreate.severity" [ngModelOptions]="{standalone: true}" [required]="taskToCreateIsInvalid">
         <option value="" selected disabled hidden>Choose severity</option>
